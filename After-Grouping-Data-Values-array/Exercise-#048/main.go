@@ -5,12 +5,18 @@ import (
 )
 
 func main() {
-	var slice2D = [][]string{}
 	
 	firstSlice := []string{"James", "Bond", "Shaken, not stirred"}
 	secondSlice := []string{"Miss", "Moneypenny", "I'm 008."}
-	slice2D = append(slice2D, firstSlice, secondSlice)
-	fmt.Println(slice2D)
+
+	slice2D := [][]string{firstSlice, secondSlice}
+
+	for i, v := range slice2D {
+		fmt.Println(i, v)
+		for a, b := range v {
+			fmt.Println(a, b)
+		}
+	}
 }
 
 /*
