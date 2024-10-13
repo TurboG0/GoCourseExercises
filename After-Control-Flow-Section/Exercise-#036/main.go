@@ -11,6 +11,6 @@ func main() {
 		}
 
 	for k, v := range m {
-		fmt.Printf("Key: %v \t Value: %v\n", k, v)
+		fmt.Printf("Key: %v\tValue: %v\n", k, v)
 	}
 }
