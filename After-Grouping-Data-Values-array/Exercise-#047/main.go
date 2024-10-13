@@ -18,9 +18,12 @@ func main() {
 		` Pennsylvania`, ` Rhode Island`, ` South Carolina`, ` South Dakota`, ` Tennessee`, ` Texas`, 
 		` Utah`, ` Vermont`, ` Virginia`, ` Washington`, ` West Virginia`, ` Wisconsin`, ` Wyoming`,
 	)
-
-	for i, v := range stateNames {
-		fmt.Printf("Index: %v\tValue: %v\n", i, v)
+	fmt.Println("--------------------------------")
+	fmt.Println("after adding elements:")
+	fmt.Println("Length: ", len(stateNames))
+	fmt.Println("Capacity: ", cap(stateNames))
+	for i := 0; i < len(stateNames); i++ {
+		fmt.Printf("Index: %v\tValue: %v\n", i, stateNames[i])
 	}
 }
 

@@ -6,10 +6,9 @@ import (
 
 func main() {
 	mySlice := []int {42, 43, 44, 45, 46, 47, 48, 49, 50, 51}
-	for _, v := range mySlice {
-		fmt.Printf("Value: %v\n", v)
+	for i, v := range mySlice {
+		fmt.Printf("%v \t %T \t %v\n", v, v, i)
 	}
-	fmt.Printf("Type: %T", mySlice)
 }
 
 /*

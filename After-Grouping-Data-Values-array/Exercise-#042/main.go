@@ -5,12 +5,15 @@ import (
 )
 
 func main() {
-	myArr := [...]int {1, 2, 3, 4, 5}
+	myArr := [5]int {}
 	
-	for _, v := range myArr {
-		fmt.Printf("Value: %v\n", v)
+	for i := 0; i < 5; i++ {
+		myArr[i] = i
 	}
-	fmt.Printf("Type of array is: %T", myArr)
+
+	for i, v := range myArr {
+		fmt.Printf("%v - %T - %v", v, v, i)
+	}
 }
 
 /*
