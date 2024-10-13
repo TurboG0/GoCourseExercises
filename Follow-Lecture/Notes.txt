@@ -1,0 +1,67 @@
+Lecture Arrays:
+
+if you initialize array like this: b := [...]string {"Saba", "Gela"}
+compiler will guess how many values are there in the array with ... inside []
+this is called literall
+
+if arrays are different type like if one is string and other int or
+if one of them is [2]int and other [3]int you can't use = operator on them
+
+for example if array c %T is [4]int and array a %T is [3]int 
+i can't do operation like c = a or vice versa
+
+------------------------------------------------------------------
+Lecture Slice:
+you can add elements into slice using append function and inside 
+append function you can add as many arguments as you want
+for example: mySlice = append(mySlice, arg1, arg2, arg3, arg4 ...)
+
+you delete element in slice also using append function and reslicing 
+method
+for example:
+    a := []int {1, 2, 3, 4, 5}
+    if i want to delete first element i will write
+    a = append(a[:0], a[1:]...)
+
+slice is built on top of array. Could be said that it is slice is referencing
+its values
+In internal of GO values are stored inside of an underlying array.
+Slice is pointing towards that underlaying array. There is pointer
+that says go look at that underlying array, that memory address where
+those values are store and then geet the values from there.
+Slice is struct. data structure for slice is pointer and it is writen
+like this. 
+type slice struct {
+    array unsafe.Pointer
+    len int
+    cap int 
+}
+
+everytime we use make it is allocating memory in heap. make is type 
+and unlike new, make return type is the same as the type of its 
+argument not a pointer to it
+
+if i have slice a and i type something like b := a
+b is pointing to underlying array that a slice has so any modification
+on those array from either slice(variable) will cause change for both
+slice(variable). in order for that to not happen use function
+copy(destination, source)
+for example:
+    a := []int{1, 2, 3, 4, 5}
+    b := make([]int, 5)
+    copy(b, a)
+
+what is copy pointing towards??
+    
+-------------------------------------------------------------------
+maps
+if you want to delete from map we need to use 
+func delete(map, key)
+
+tu mapidan iseti elemntis washal sheecdebi romelic ar arsebobs an ramdenime
+xnis win washale, aranairi errori ar moxdeba da compileri ar chavardeba
+panikashi da ar getyvis ras aketeb shig ho ar gaqo mokled
+
+tu mapis value aris int da key ar arsebobs is 0-s daabrunebs
+
+comma okay idiom
