@@ -106,4 +106,75 @@ type Stringer interface {
     String() string
 }
 is stringer
-this is gonna allow us to change how the type print out as a string
+if you want to adjust how the default printin is of stuff,
+you can implement the stringer interface
+
+
+wrapper is a function that provides and additional layer
+of abstraction of functionality around an existing function or
+method. it allos you to modify inputs, outpus, or behaviour
+of funciton without directly modifying it
+
+we also have writer interface. any type that implemets this method
+Write(p []byte) (n int, err err) is a Writer interface
+writer interface looks like this:
+type Writer interface {
+    Write(p []byte) (n int, err error)
+}
+
+creating files be like:
+first of all we need "os" package to be implemented
+to create function you i need:
+os.Create("output.txt") which returns file and error
+in order to writen in file i need:
+Write(b []byte) function which returns int and error
+
+what is the difference between string and slice of bytes?
+first of all they are different types, but they are closely related
+and can often be converted betweem each other
+A string in go represents a sequence of characters. it is an
+immutable type, which means you can't modify individual characters
+inside string. string values are always interpreted as UTF-8 
+encoded Unicode text.
+[]byte is slice of bytes, where each element represents single byte.
+It is mutable type, so you can modify individual bytes within a byte
+slice. It can be used to represent binary data or text in various
+encoding
+examples of converting these types
+string to a byte slice:
+str := "Hello"
+bytes := []byte(str)
+byte slice to a string
+bytes := byte{72, 101, 108, 108, 111}
+str := string(bytes)
+IMPORTENT:converting between strings and byte slices involves encoding
+and decoding operatins, which can indroduce potential errors if encoding
+is not handeled correctly. be maindful of the encoding.
+
+byte buffer is a region of memory used to temporarily store a 
+sequence of bytes. it is useful for tasks like 
+data serialization, network communication, file I\O, and efficient
+string manipulation.
+A byte buffer is a data structure that provides a convenient interface
+to manipulate sequences of byte efficiently. It serves a a temporary
+storage for byte data and enables operations such as reading, writing,
+appending, and resizing byte sequences.
+(Find more info on this from course outline from page 75 +-2)
+if you want to create buffer you do that like this:
+b := bytes.NewBufferString("Hello")
+if you want to print that buffer you do this:
+fmt.Println(b.String())
+if you want to write in buffer you use this function:
+b.WriteString("Ghopers!")
+if you want to reset buffer you use this function:
+b.Reset()
+you can write in buffer also like this:
+b.Write([]byte("happy happy haaapppyyy"))
+buffer implements the writer interface
+
+NOTE: Functions are type in go meaning we can assign functions to
+variables
+
+we can return functions and we can pass funtcion as an argument
+
+Callback is when you pass function as an argument

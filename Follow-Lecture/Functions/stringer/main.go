@@ -20,11 +20,16 @@ func (c count) String() string {
 	return fmt.Sprint("This is the number ", strconv.Itoa(int(c)))
 }
 
+func logInfo(s fmt.Stringer) {
+	log.Println("LOG FROM 138", s.String())
+}
+
+
 func main() {
 	b := book {
 		title: "Utao tani",
 	}
 	var n count = 42
-	log.Println(b)
-	log.Println(n)
+	logInfo(b)
+	logInfo(n)
 }
