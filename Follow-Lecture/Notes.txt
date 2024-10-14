@@ -65,3 +65,45 @@ panikashi da ar getyvis ras aketeb shig ho ar gaqo mokled
 tu mapis value aris int da key ar arsebobs is 0-s daabrunebs
 
 comma okay idiom
+--------------------------------------------------------------------
+Functions
+
+tip: if you are comming for other languages such as me from c++
+drop terminology like pass by value pass by reference
+when you pass a value as an argument to a function, it's going to assign
+that value to a variable, to an identifier. argument is passed
+by value
+
+if i want to create function with unlimited parameter it should look
+something like this:
+func sum(ii ...int){} 
+if you use %T on argument that is passed in this function you will 
+see that it is actually slice of int []int. search Variadic with
+ctrl + f inside go doc to see more
+this variadic parameter ... needs to be last obviously. you can pass
+other arguments normally if you like behind variadic parameter
+Note: variadic parameter ... also accepts 0 parameters
+
+
+defer statement doesn't run the function till the outer surrounding function
+exits and does it's thing
+
+when you write identifie for function for example
+func (p Person) speak() it almost adds it in that struct like
+this function was written inside that Person struct like you write
+methods in c++ and other oop languages. so if i want to call that func
+i will call it like p.speak() and not just speak(). If function has
+reciever it is called method.
+
+Interfaces allow us to have polymorphysm which means that one value,
+which is of a certain type, can also be of another type
+
+Interface rizz be like: hey babe if you got these methods you are my type
+
+Stringer interfece be working like:
+any type that has method with returns string eg
+type Stringer interface {
+    String() string
+}
+is stringer
+this is gonna allow us to change how the type print out as a string

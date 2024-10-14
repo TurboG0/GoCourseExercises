@@ -32,9 +32,10 @@ func main() {
 	fmt.Println("Length", len(an))
 	
 	
+	
 	//use for range to loop over map
 	fmt.Println("------------------------------")
-
+	
 	for k, v := range an {
 		fmt.Println(k, v)
 	}
@@ -47,16 +48,16 @@ func main() {
 	for k := range an {
 		fmt.Println(k)
 	}
-
+	
 	//map delete element
 	fmt.Println("------------------------------")
-
+	
 	delete(an, "Gela") 
 	// won' panic even though element is already deleted if it existed 
 	delete(an, "Gela")
-
+	
 	fmt.Println(an)
-
+	
 	fmt.Println("------------------------------")
 	//accesing key that is already deleted
 	delete(an, "Saba") // won't panic
@@ -64,5 +65,27 @@ func main() {
 	
 	//comma ok idiom
 	fmt.Println("------------------------------")
+	v, ok := an["Dildo Beggins"]
+	if ok {
+		fmt.Println("Dildo Beggins value is: ", v)
+		} else {
+			fmt.Println("Key didn't exist")
+		}
 	
+	//statement statement
+	fmt.Println("------------------------------")
+	if v, ok := an["Bichiko"]; !ok {
+		fmt.Println("Key doesn't Exist")
+		} else {
+			fmt.Printf("Value of Bichiko is %v\n", v)
+		}
+		
+	//counts how many times word beautiful appears
+	fmt.Println("------------------------------")
+	m := make(map[string]int)
+	fmt.Println(m["beautiful"])
+	m["beautiful"]++
+	fmt.Println(m["beautiful"])
+	m["beautiful"]++
+	fmt.Println(m["beautiful"])
 }
