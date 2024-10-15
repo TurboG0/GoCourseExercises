@@ -1,0 +1,44 @@
+Hands-on exercises
+Hands-on exercise #57 - func concepts
+● look through all of these concepts & tell yourself about them:
+○ functions
+
+Todd McLeod - Learn To Code Go - Page 97
+○ purpose of functions
+■ modular code
+■ abstracting code
+■ code reusability
+● DRY - Don’t Repeat Yourself
+○ parameters vs arguments
+○ syntax
+■ func, receiver, identifier, params, returns, execute
+■ returns
+● multiple returns
+● named returns // Todd doesn't like
+○ variadic parameters
+○ unfurling a slice
+○ defer
+○ methods
+○ interfaces & polymorphism
+■ stringer interface
+■ wrapper func
+● logging example
+■ writer interface
+● writing to file or byte buffer
+○ anonymous func
+○ func expressions
+■ assigning a func to a variable
+○ returning a func
+■ functions are first class citizens
+○ callbacks
+■ passing a func into another func as an argument
+○ closure
+■ one scope enclosing another
+■ variables declared in the outer scope are accessible in inner scopes
+■ closure helps us limit the scope of variables
+○ recursion
+■ a func that calls itself
+■ factorial
+● life philosophy
+○ focus on what’s important; not upon what’s urgent
+https://go.dev/play/p/6W8-8CaJjVb

@@ -85,8 +85,8 @@ other arguments normally if you like behind variadic parameter
 Note: variadic parameter ... also accepts 0 parameters
 
 
-defer statement doesn't run the function till the outer surrounding function
-exits and does it's thing
+defer statement doesn't run the function till the outer surrounding 
+function exits and does it's thing
 
 when you write identifie for function for example
 func (p Person) speak() it almost adds it in that struct like
@@ -112,19 +112,19 @@ you can implement the stringer interface
 
 wrapper is a function that provides and additional layer
 of abstraction of functionality around an existing function or
-method. it allos you to modify inputs, outpus, or behaviour
+method. it allows you to modify inputs, outpus, or behaviour
 of funciton without directly modifying it
 
 we also have writer interface. any type that implemets this method
-Write(p []byte) (n int, err err) is a Writer interface
+Write(p []byte) (n int, err error) is a Writer interface
 writer interface looks like this:
 type Writer interface {
     Write(p []byte) (n int, err error)
 }
 
 creating files be like:
-first of all we need "os" package to be implemented
-to create function you i need:
+first of all we need "os" package to be included
+to create file i need to use os.Create("file.txt") function:
 os.Create("output.txt") which returns file and error
 in order to writen in file i need:
 Write(b []byte) function which returns int and error
@@ -142,13 +142,11 @@ slice. It can be used to represent binary data or text in various
 encoding
 examples of converting these types
 string to a byte slice:
-str := "Hello"
 bytes := []byte(str)
 byte slice to a string
-bytes := byte{72, 101, 108, 108, 111}
 str := string(bytes)
 IMPORTENT:converting between strings and byte slices involves encoding
-and decoding operatins, which can indroduce potential errors if encoding
+and decoding operations, which can indroduce potential errors if encoding
 is not handeled correctly. be maindful of the encoding.
 
 byte buffer is a region of memory used to temporarily store a 
@@ -178,3 +176,12 @@ variables
 we can return functions and we can pass funtcion as an argument
 
 Callback is when you pass function as an argument
+
+Hands-on-Exercise #67 return to this every day and try to rewrtire
+code that is in it
+
+
+why do we use anonymous functions. what is the main reason for it?
+Anonymous funcs are commonly used when you want to pass a function 
+as an argument to another function or when you need to 
+define a short-lived function for a specific task.
