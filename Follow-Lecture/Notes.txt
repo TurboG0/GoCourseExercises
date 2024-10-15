@@ -1,3 +1,8 @@
+ ****************************************************************
+ * PRACTICE MAKES PROGRESS. REPETITION IS THE MOTHER OF MASTERY *
+ * PERSISTENTLY PATIENTLY YOU'RE BOUND TO SUCCEED               *
+ ****************************************************************
+
 Lecture Arrays:
 
 if you initialize array like this: b := [...]string {"Saba", "Gela"}
