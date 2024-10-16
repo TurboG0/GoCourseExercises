@@ -1,6 +1,6 @@
  ****************************************************************
  * PRACTICE MAKES PROGRESS. REPETITION IS THE MOTHER OF MASTERY *
- * PERSISTENTLY PATIENTLY YOU'RE BOUND TO SUCCEED               *
+ *      PERSISTENTLY PATIENTLY YOU ARE BOUND TO SUCCEED         *
  ****************************************************************
 
 Lecture Arrays:
@@ -190,3 +190,178 @@ why do we use anonymous functions. what is the main reason for it?
 Anonymous funcs are commonly used when you want to pass a function 
 as an argument to another function or when you need to 
 define a short-lived function for a specific task.
+
+-----------------------------------------------------------------------
+//es da zemot funqciebi unda wavikitxo yovel dge rata kargad gajdes tvinshi
+
+Pointers
+
+In Go reference type is pointer
+Go has several reference types which are: pointers, slices, maps,
+functions, interfaces and channels
+
+NOTE: when you assign a reference type to another variable, the new variable references the same memory location
+
+In Go, all data is passed by value, which means that whenever you pass data to a function, Go
+creates a copy of that data and assigns the copy to a parameter variable. The function can do
+whatever it wants to the copy without affecting the original data
+
+A mutable value is a value that can be changed. In Go, slices, maps, and pointers are
+mutable data types. Even though they are passed by value, they still behave as if they were
+passed by reference because the "value" that is copied and passed is the reference to the
+underlying data, not the actual data in case of slice it is underlaying array
+
+Since everything in Go is passed as a value pointer is also passed as a value and is no exception to the rule. This means that function get copy of the address. Therefore, dereferencing the pointer and
+modifying the value it points to inside the function will modify the original value.
+
+In summary, in Go, everything is passed by value. However, for mutable data types, the
+"value" that's passed includes a reference to the underlying data, which is why changes
+made inside the function are visible outside of it.
+
+Pointer and value semantics
+Pointer semantics in Go, involve passing the memory address (a "pointer")
+rather than the data itself. This means that you can modify the original data, not just a copy of
+it
+
+Value semantics are simpler and often safer because they avoid side effects, but
+they can be inefficient for large data structures because they involve copying data
+
+GUIDELINES to follow whether to use pointer or value semantics
+
+1.Use Value Semantics When Possible:
+● Value semantics are simpler and usually safer, since they don't involve shared state
+or require you to think about memory management.
+
+● rule of thumb, if a function doesn't need to modify its input, or the data you're working
+with is small (like built-in types or small structs), use value semantics. s
+
+● rule of thumb: use value semantics for builtin types (numeric, string, bool) and
+
+reference types (slices, maps, channels, pointer, interfaces, functions)
+
+2. Use Pointer Semantics for Large Data:
+● Copying large structs or arrays can be inefficient.
+
+● If the data you're working with is large, you might want to use pointer semantics to
+avoid the cost of copying the data. A rule of thumb: 64 bytes or larger, use pointers.
+
+3. Use Pointer Semantics for Mutability:
+● If a function or method needs to modify its receiver or an input parameter, you'll need
+to use pointer semantics.
+
+● This is a common use case for methods that need to update the state of a struct.
+
+4. Consistency:
+● It's important to be consistent. If some functions on a type use pointer semantics and
+others use value semantics, it can lead to confusion. Typically, once a type has a
+method with pointer semantics, all methods on that type should have pointer
+semantics.
+
+5. Pointer Semantics When Interfacing With Other Code:
+● If you're interfacing with other code (like a library or a system call), you might need to
+use pointer semantics. For example, the `json.Unmarshal` function in the Go standard
+library requires a pointer to a value to populate it with unmarshalled data
+
+VALUE SEMANTICS
+value semantics facilitate higher levels of integrity
+"the majority of bugs that we get in software have to do with the
+mutation of memory" ~ Bill Kennedy
+everybody gets their own copy of the data (pass by value) helps
+keep data bug free
+● if everybody is isolated to their own copy of the data (pass
+by value) then the bug is isolated to that one piece of code
+○ value semantics also reduce side-effects around concurrency
+○ more likely to keep values on the stack
+○ you can have methods that use pointers if there's some form of unmarshaling
+going on
+
+POINTER SEMANTICS
+you don’t want to pass around a lot of data
+you want to change the data at a location (mutability)
+
+Remember: the decision of using pointer or value semantics should be more about
+sharing and mutating state rather than memory allocation and performance
+
+The idea of the method set is integral to how interfaces are implemented and used in Go.
+An interface in Go defines a method set, and any type whose method set is a superset of the
+interface's method set is considered to implement that interface
+if you define a method with a pointer receiver, the
+method is only in the method set of the pointer type. This is important in the context of
+interfaces because if an interface requires a method that's defined on the pointer (not the
+value), then you can only use a pointer to that type to satisfy the interface, not a value of the
+type.
+
+questions I need to answert to provet to my self that I understand these concepts
+1. In go what is referece type? list the reference types
+2. What happens when you assign a reference type to another variable?
+3. In Go how is data passed? and what does it do
+4. What is mutable value ? list mutable data types. how do this data types behave when they are passed?
+5. when pointer is passed in functoin how is it passed and what does the function get? what will happen to original value if i modify pointer inside the function?
+6. Describe Pointer and Value semantics
+7. What are the GUIDELINES of using either Pointer or Value semantics?
+8. What are rule of thumb of using Value semantics?
+9. Which semantic do I need to use when i'm interfecing with other code?
+and what does interfecing with other code mean?
+10. Benefits of using Value Semantics and Pointer Semantics.
+11. when making decision on which semantic to use what should i remember?
+12. Which semantic kinda has to be default? and why
+13. If i use pointer semantics what are values more likely to do ?
+14. What command or so to say flag can i use to check whether value escpaes heap or not?
+15. What are method sets and why are they important?
+answer these question every day till I go to Germany.
+Read Pointer section at least 3 times in couser_outline folder.
+Look into Follow-Lecture -> pointers -> method-sets dir pretty important stuff is written there about method-sets
+--------------------------------------------------------------------------
+Generics:
+
+Generics allow us to abstract our code and make it more DRY(Do not Repeat Yourself)
+
+syntax for creating generic function of type T that accepts values i want
+in this case int and float64
+func addT[T int | float64](){
+
+}
+
+type set interface allows us to abstract our generic functions even more eg 
+type mynumbers interface {
+	int | float64
+}
+
+// abstract previously ussed addT function with interface
+func addT[T mynumbers](a, b T) T {
+	return a + b
+}
+
+Type alliases and underlying type constraints
+
+if i add ~ behind the type for example int it tells compiler to include all values of that type in my example of type int
+type mynumbers interface {
+	~int | ~float64
+}
+
+// abstract previously ussed addT function with interface
+func addT[T mynumbers](a, b T) T {
+	return a + b
+}
+
+type myAlias int
+
+func main() {
+	var n myAlias = 22
+	fmt.Println(addT(n, 2))
+	fmt.Println(addT(1.2, 2.2))
+}
+this won't work without ~int inside myNumbers interface
+
+package constraint
+
+comparable is any type that can be compared like int, boolean, string etc
+
+
+concrete type vs interface type
+
+what is concrete type ?
+concrete type is a type that you can directly instantie or create from. This means that type can directly represent a set of values and that you can create an instance of this type without any additional information.
+concrete type examples: int, bool, string, float64, slices, maps, structs
+
+interface type is abstract. they represent behaviour or type but not a specific set of values
