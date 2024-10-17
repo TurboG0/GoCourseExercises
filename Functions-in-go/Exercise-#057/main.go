@@ -7,6 +7,7 @@ func main() {
 	fmt.Println(sum(x))
 }
 
+
 func sum(ii []int) (total int) {
 	total = 0
 	for _, v := range ii {
