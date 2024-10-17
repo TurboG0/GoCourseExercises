@@ -393,3 +393,44 @@ bcrypt
 is an excellent way to store a password information. as soon as u get user password u encrypt it with bcrypt and even you don't know what the password is. Generally you never store password you only store encrypted version of it.
 inside go docs you can search bcrypt
 
+--------------------------------------------------------------------
+Concurrency
+
+Concurency is a design pattern which allows code to run in parrarel. It's a way that you could write your code. Concurency which is a design pattern doesn't guarantee that your code will run parrarel.
+
+WaitGroup
+to make go routines work we have to use some form of syncronization.
+We have to tell our code to wait so entry point function main() doesn't finish it's execution before go routine starts running.
+
+we have function called func (wg *WaitGroup) Add(delta int)
+this function waits for n amount of things, n being integer argument you pass yo Add function
+we also need func (wg *WaitGroup) Wait() and  func (wg *WaitGroup) Done() functions. read about these in godoc.org/sync and read godoc.org/runtime. Be sure that I understand methodsets at this point.
+
+IMPORTANT: "The method set of a type determine the interfaces that the type implements and the methods that can be called using a receiver of that type"
+    A NON-POINTER RECEIVER works with values that are POINTERS or NON-POINTERS
+    A POINTER RECEIVER only works with values that are POINTERS
+
+Read effective go documentation on concurrency
+    "Do not communicate by sharing memory. instead share memory by communicating"
+
+Only one goroutine has access to the value at any given time. Data races cannot occur, by design.
+
+ A goroutine has a simple model: it is a function executing concurrently with other goroutines in the same address space
+ what does it mean to execute in the same address space as something else?
+
+ Race condition
+go run -race . checks for race conditions and runs go
+but it needs gcc to be installed in order for it to work
+
+ first of all use mutex to lock down code to avoid Race conditions
+ for that we will need to create var mu sync.Mutex and use function
+ like mu.Lock() and mu.Unlock() and place code in between them which reads value and writes in it. THere is alwa RWMutex that gives more flexibility. allows unlimited Reads
+
+ Atomic
+ with atomics i have to use int64 variables
+ func AddInt64(addr *int64, delta int64) (new int64)
+ AddInt64 atomically adds delta to *addr and returns the new value
+ to read from atomic use func LoadInt64(addr *int64) (val int64)
+
+  Except for special, low-level applications, synchronization is better done with channels or the facilities of the sync package.
+  init order to print out from atomic i need atomic.LoadInt64(&v)
