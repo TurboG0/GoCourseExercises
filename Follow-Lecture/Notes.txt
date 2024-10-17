@@ -365,3 +365,31 @@ concrete type is a type that you can directly instantie or create from. This mea
 concrete type examples: int, bool, string, float64, slices, maps, structs
 
 interface type is abstract. they represent behaviour or type but not a specific set of values
+------------------------------------------------------------------------
+Json
+cool websites:
+https://rawgit.com
+https://mholt.github.io/json-to-go/
+godoc.org   // check this out and try to understand code that is written behing the function like fmt.Println and function I use from go standard library in general. Check indexes in Package io and stuff like that
+
+use marshal to turn your data into json and use unmarshal to 
+use that data into Go or any language
+
+Need to find out about Encode and Decode
+
+Writer interface is real important shit
+if i have Writer interface i can pass that to NewEncode function which
+give me pointer to Encoder *Encoder. I can then use that *Encoder
+to Encode shit
+
+Reader interface is also important shit
+
+Learn about Sort interface from godoc
+
+for sorting stuff just check directory inside 
+Follow-Lecture > Json > sort or customSort
+
+bcrypt
+is an excellent way to store a password information. as soon as u get user password u encrypt it with bcrypt and even you don't know what the password is. Generally you never store password you only store encrypted version of it.
+inside go docs you can search bcrypt
+

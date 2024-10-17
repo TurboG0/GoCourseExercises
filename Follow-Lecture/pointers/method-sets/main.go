@@ -35,7 +35,6 @@ func main() {
 	// using interface
 	//youngin(d1) // this doesn't work because method run has pointer receiver
 
-
 	// pointer semantics. pointer to dog
 	d2 := &dog{"Maxi"}
 	d2.walk()
