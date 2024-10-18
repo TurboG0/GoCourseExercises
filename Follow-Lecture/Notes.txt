@@ -434,3 +434,113 @@ but it needs gcc to be installed in order for it to work
 
   Except for special, low-level applications, synchronization is better done with channels or the facilities of the sync package.
   init order to print out from atomic i need atomic.LoadInt64(&v)
+-----------------------------------------------------------------
+Channels
+Channels are higher level order way, a better way for synchronizing your code and writing concurrent code
+
+to make channel
+    c := make(chan int) obviously we are putting integers in this channel
+
+    c <- 42     this puts number 42 inside channel
+    fmt.Prinln(<-c)     will print that value
+
+the code above won't run. This will give error all go routines are asleep. Deadlock. And that's because channels  blocked. When you send and receive on a channel, it's like relay racers, racers in a track race. Runners have to pass a baton and they have to pass it hand to hand. Transaction cannot occure because until both send and receive can happen at the same time. If they can't happen at the same time, it blocks the send and receive blocks until the receiver is ready to pull it off.
+
+channels block
+channels block 
+channels block
+channels block
+channels block
+
+so how do we fix code above?
+
+c := make(chan int)
+
+go func () {
+    c <- 42
+}()
+fmt.Println(<-c)
+
+so what is happening here?
+this 42 is getting put into channel. c <- 42 blocks it in go routine. But because this go routine has just been sent off to run on its own, the other go routine, the main go routine comes down here, fires off this one, and then the flow continues it.
+then it comes down to fmt.Println(<-c) and that <-c blocks until it takes the value off. And then so this one's over there ready to put it on that one down here
+
+
+this is buffer channel
+c := make(chan int, 1)
+buffe channel is a channle that will allow certain values to sit in that channel regardless of whether or not something's ready to pull it off. And so I can say, okay, my buffer channel will allow one to sit in there. Here my channel is going to allow 1 value to sit in there. 
+
+try to stay away from buffer channels
+try to stay away from buffer channels
+
+channels are runners in a relay race
+    they are synchronized
+    they have to pass/receive the value at the same time
+        just like runners in a relay race have to pass / receive the
+        baton to each other at the same time
+            one runner can't pass the baton at one moment
+            and then laterr have the other runner receive the baton
+            the baton is passed/received by the runners at the same time
+        the values is passed/received synchronously; at the same time
+
+the channels in above examples are biderectional chanels because in those channels we are both able to send on to the channel and we are able to receive from that channel
+
+to make one directional chanel that you only will be able to send values on to you need to do this:
+c := make(chan <- int)
+
+to make one directional chanel that you only will be able to receive values onto you need to do this:
+c := make(<-chan int)
+
+c := make(chan int) // type is chan int
+cr := make(<-chan, int) // type is <-chan int
+cs := make(chan<-, int) // type is chan<- int
+
+specific to general doesn't assign 
+c = cr // doesn't work
+c = cs // doesn't work
+
+general to specific assigns
+cr = c
+cs = c
+
+general to specific converts
+(<-chan int)(c)
+(chan<- int)(c)
+
+specific to general doesn't work
+(chan int)(cr)
+(chan int)(cs)
+
+so rule of thumb: from specific to general doesn't work
+                  from general to specific does work
+
+
+in funcs you can specify
+    receive channel
+        you can receive values from the channel
+        a receive channel parameter
+        in the func, you can only pull values from the channel
+    send channel
+        you can push values to the channel
+        you can't receive/pull/read from channel
+        you can only push values to channel
+
+when using chanels it's better to create dual chanel and then decide whether it is going to be reiceiver or sender inside function
+
+
+when you are done using chanel use close(c) function where c in this function is channel. this function closes primary channel
+
+range over channel
+range loop pulls off of a channel until the channel is closed and it just is there pulling, waiting to pull until it is closed. And when the channel is close, it pull any last value or values that are still on the channel. this is the reason why we need to close channel after we are done with it
+
+select statement is going to look which are the channels that it can pull value off of. 
+
+Comma ok idiom
+
+
+
+Fan in Pattern.
+Fan in is common desgin pattern because it's like, okay, I have a chunk of work I don't know how much it's gonna be. Let's fan that out to as many go routines as possible. They will all be working on that as much as  they can, and then when they get results, we will fan those results back into another channel and we'll get a channel with just the resutls.
+
+Fan out Pattern.
+When you fan out you are taking like a piece of work. Llets say i have something that needs to be done over and over and over again many times, like encoding videos and I have a proccess that runs for encoding videos and i have 1000videos that need to be encoded. I can say hey encode these videos and for each of these videos run go routine and launch all 1000 go routines encode them at the same time take results and bring it back. we can also throtle this meaning I can say that I only want to encode 10 videos at a time instead of 1000
