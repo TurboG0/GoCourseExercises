@@ -544,6 +544,7 @@ Fan in is common desgin pattern because it's like, okay, I have a chunk of work 
 
 Fan out Pattern.
 When you fan out you are taking like a piece of work. Llets say i have something that needs to be done over and over and over again many times, like encoding videos and I have a proccess that runs for encoding videos and i have 1000videos that need to be encoded. I can say hey encode these videos and for each of these videos run go routine and launch all 1000 go routines encode them at the same time take results and bring it back. we can also throtle this meaning I can say that I only want to encode 10 videos at a time instead of 1000
+<<<<<<< HEAD
 -------------------------------------------------------------------------
 Error handling
 
@@ -564,3 +565,5 @@ log.SetOutput() this function implements writer interface. since File implements
 panic(v interface{}) stops normal execution of the current goroutine. When a function F calls panic, normal execution of F stops immediately
 
 Recover
+=======
+>>>>>>> 511f4a518b577ab0c4b8bb16af503c0a6251d996
