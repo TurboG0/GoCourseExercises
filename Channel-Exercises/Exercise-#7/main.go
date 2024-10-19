@@ -16,7 +16,8 @@ func main() {
 			}
 		}()
 	}
-	for i := 0; i < goroutines * 10; i++ {
+
+	for i := 0; i < goroutines*10; i++ {
 		fmt.Println(<-c)
 	}
 
